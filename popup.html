@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowSave</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ── HEADER ── -->
+  <header>
+    <div class="logo">✦ FlowSave</div>
+    <div class="header-actions">
+      <a id="btn-bmc" href="https://studio.buymeacoffee.com/dashboard" target="_blank" class="btn-bmc" title="Buy me a coffee ☕">☕</a>
+      <button id="btn-new-project" class="btn-icon" title="New project">+</button>
+    </div>
+  </header>
+
+  <!-- ── VIEWS ── -->
+
+  <!-- VIEW: project list -->
+  <div id="view-projects" class="view active">
+    <div class="section-label">Projects</div>
+    <ul id="project-list" class="item-list"></ul>
+    <div id="empty-projects" class="empty-state hidden">
+      No projects yet.<br>Click <strong>+</strong> to create one.
+    </div>
+  </div>
+
+  <!-- VIEW: checkpoint list -->
+  <div id="view-checkpoints" class="view hidden">
+    <div class="back-bar">
+      <div class="back-bar-left">
+        <button id="btn-back-projects" class="btn-back-projects" title="All projects">⬡ Projects</button>
+        <span class="back-separator">/</span>
+        <span id="back-project-name" class="back-project-name"></span>
+      </div>
+      <button id="btn-new-checkpoint" class="btn-primary-sm">+ Save</button>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="gold">⭐ Gold</button>
+      <input id="tag-filter" class="tag-input-sm" type="text" placeholder="#tag" />
+    </div>
+    <ul id="checkpoint-list" class="item-list"></ul>
+    <div id="empty-checkpoints" class="empty-state hidden">
+      No checkpoints yet.<br>Select text in the chat, right-click<br>and choose <strong>Save as Checkpoint ✦</strong>
+    </div>
+  </div>
+
+  <!-- VIEW: save checkpoint form -->
+  <div id="view-save" class="view hidden">
+    <div class="back-bar">
+      <button id="btn-back-save" class="btn-back">← Back</button>
+      <span class="form-title">New checkpoint</span>
+    </div>
+    <div class="form">
+      <label>Name
+        <input id="cp-name" type="text" placeholder="e.g. navbar working" maxlength="80" />
+      </label>
+      <label>Saved text
+        <textarea id="cp-text" rows="5" placeholder="Paste or edit the conversation excerpt…"></textarea>
+      </label>
+      <label>Notes <span class="hint">(pros, cons, ideas)</span>
+        <textarea id="cp-notes" rows="3" placeholder="e.g. API returns 200 but UI flickers on reload"></textarea>
+      </label>
+      <label>Tags <span class="hint">(space-separated)</span>
+        <input id="cp-tags" type="text" placeholder="#working #bug #idea" />
+      </label>
+      <div class="rating-row">
+        <label>Rating</label>
+        <div class="rating-stars" id="rating-stars"></div>
+        <span id="rating-value" class="rating-value">5</span><span class="hint">/10</span>
+      </div>
+      <label class="gold-row">
+        <input id="cp-gold" type="checkbox" />
+        <span>⭐ Mark as Gold</span>
+      </label>
+      <button id="btn-save-cp" class="btn-primary">Save checkpoint</button>
+    </div>
+  </div>
+
+  <!-- VIEW: checkpoint detail -->
+  <div id="view-detail" class="view hidden">
+    <div class="back-bar">
+      <button id="btn-back-detail" class="btn-back">← Back</button>
+      <div class="detail-actions">
+        <button id="btn-edit-cp" class="btn-icon-sm" title="Edit">✎</button>
+        <button id="btn-delete-cp" class="btn-icon-sm danger" title="Delete">✕</button>
+      </div>
+    </div>
+    <div id="detail-content" class="detail-content"></div>
+    <button id="btn-copy-prompt" class="btn-primary btn-copy">📋 Copy restore prompt</button>
+  </div>
+
+  <!-- MODAL: new project -->
+  <div id="modal-project" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-title">New project</div>
+      <input id="project-name-input" type="text" placeholder="Project name" maxlength="60" />
+      <div class="modal-actions">
+        <button id="btn-cancel-project" class="btn-ghost">Cancel</button>
+        <button id="btn-confirm-project" class="btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
